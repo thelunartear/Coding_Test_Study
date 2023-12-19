@@ -11,11 +11,6 @@ int solution(int a, int b) {
     int ans1=stoi(str_a+str_b);
     int ans2=stoi(str_b+str_a);
     
-    if(ans1>ans2)
-        answer=ans1;
-    else if(ans1<ans2)
-        answer=ans2;
-    else
-        answer=ans1;
+    answer = max(ans1, ans2);
     return answer;
 }
