@@ -3,13 +3,6 @@
 
 using namespace std;
 
-void swap(int &a, int &b)
-{
-    int temp = a;
-    a = b;
-    b = temp;
-}
-
 vector<int> solution(vector<int> arr, vector<vector<int>> queries) {
     for(const auto& query:queries)
     {
