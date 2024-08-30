@@ -1,26 +1,34 @@
 #include <iostream>
+#include <vector>
 #include <algorithm>
-#include <cmath>
-
 using namespace std;
 
-int main() {
-	int n, x[100000], y[100000];
-	cin >> n;
-	for (int i = 0; i < n; i++) {
-		cin >> x[i] >> y[i];
-	}
-	sort(x, x + n);
-	sort(y, y + n);
+int n;
+vector<pair<int, int>> p;
 
-	int x1 = x[(n - 1) / 2];
-	int y1 = y[(n - 1) / 2];
+int main()
+{
+    ios::sync_with_stdio(0);
+	cin.tie(0);
+    cout.tie(0);
 
-	long sum = 0;
+    cin>>n;
+    for(int i=0;i<n;i++)
+    {
+        int x, y;
+        cin>>x>>y;
+        p.push_back({x,y});
+    }
 
-	for (int i = 0; i < n; i++) {
-		sum += abs(x1 - x[i]);
-		sum += abs(y1 - y[i]);
-	}
-	cout << sum << endl;
+    sort(p.begin(), p.end(), [](pair<int, int>& a, pair<int, int>& b) {return a.first<b.first;});
+    int mx=p[n/2].first;
+    sort(p.begin(), p.end(), [](pair<int, int>& a, pair<int, int>& b) {return a.second<b.second;});
+    int my=p[n/2].second;
+
+    long long ans=0;
+    for(int i=0;i<n;i++)
+    {
+        ans+=abs(p[i].first-mx)+abs(p[i].second-my);
+    }
+    cout<<ans;
 }
