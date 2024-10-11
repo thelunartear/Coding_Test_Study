@@ -1,4 +1,4 @@
-# [Silver II] 정수 삼각형 - 1932 
+# [Silver I] 정수 삼각형 - 1932 
 
 [문제 링크](https://www.acmicpc.net/problem/1932) 
 
