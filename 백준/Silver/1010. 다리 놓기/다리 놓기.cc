@@ -1,0 +1,39 @@
+#include <iostream>
+using namespace std;
+
+int dp[31][31];
+
+int Combi(int n, int r)
+{
+    for(int i=0;i<=n;i++)
+    {
+        for(int j=0;j<=min(i,r);j++)
+        {
+            if(j==0||j==i)
+            {
+                dp[i][j]=1;
+            }
+            else
+            {
+                dp[i][j]=dp[i-1][j-1]+dp[i-1][j];
+            }
+        }
+    }
+    return dp[n][r];
+}
+
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
+
+    int t;
+    cin>>t;
+
+    for(int i=0;i<t;i++)
+    {
+        int a,b;
+        cin>>a>>b;
+        cout<<Combi(b,a)<<"\n";        
+    }
+}
