@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-int dp[31][31];
+int dp[30][30];
 
 int Combi(int n, int r)
 {
@@ -15,7 +15,7 @@ int Combi(int n, int r)
             }
             else
             {
-                dp[i][j]=dp[i-1][j-1]+dp[i-1][j];
+                dp[i][j]=dp[i-1][j-1]+dp[i-1][j];    
             }
         }
     }
@@ -30,10 +30,10 @@ int main()
     int t;
     cin>>t;
 
-    for(int i=0;i<t;i++)
+    while(t--)
     {
-        int a,b;
-        cin>>a>>b;
-        cout<<Combi(b,a)<<"\n";        
+        int x,y;
+        cin>>x>>y;
+        cout<<Combi(y,x)<<"\n";
     }
 }
