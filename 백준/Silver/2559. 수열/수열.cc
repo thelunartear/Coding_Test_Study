@@ -1,29 +1,28 @@
 #include <iostream>
-#include <algorithm>
+#include <climits>
 using namespace std;
 
-int main() {
-	int arr[100000];
-	int n, k;
+int sum[100001];
+int ans = INT_MIN;
 
-	cin >> n >> k;
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
 
-	for (int i = 0; i < n; i++) {
-		cin >> arr[i];
-	}
+    int n, k;
+    cin>>n>>k;
 
-	int sum = 0;
-	int idx = 0;
-	int max_val = -10000004;
+    for(int i=1;i<=n;i++)
+    {
+        int temp;
+        cin>>temp;
+        sum[i]=sum[i-1]+temp;
+    }
 
-	for (int i = 0; i < n; i++) {
-		sum += arr[i];
-		idx++;
-		if (idx == k) {
-			max_val = max(max_val, sum);
-			sum -= arr[i - k + 1];
-			idx--;
-		}
-	}
-	cout << max_val << endl;
+    for(int i=k;i<=n;i++)
+    {
+        ans=max(ans, (sum[i]-sum[i-k]));
+    }
+    cout<<ans;
 }
