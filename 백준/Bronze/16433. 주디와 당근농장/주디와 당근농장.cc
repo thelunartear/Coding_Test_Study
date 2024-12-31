@@ -1,8 +1,6 @@
 #include <iostream>
 using namespace std;
 
-char arr[100][100];
-
 int main()
 {
     ios::sync_with_stdio(false);
@@ -14,8 +12,6 @@ int main()
     r--;
     c--;
 
-    arr[r][c]='v';
-
     int p=(r+c)%2;
 
     for(int i=0;i<n;i++)
@@ -24,19 +20,13 @@ int main()
         {
             if((i+j)%2==p)
             {
-                arr[i][j]='v';
+                cout<<'v';
             }
             else
             {
-                arr[i][j]='.';
+                cout<<'.';
             }
         }
-    }
-
-    for(int i=0;i<n;i++)
-    {
-        for(int j=0;j<n;j++)
-            cout<<arr[i][j];
         cout<<"\n";
     }
 }
