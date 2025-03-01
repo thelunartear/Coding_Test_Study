@@ -17,17 +17,17 @@ int main()
     for(int i=0;i<n;i++)
     {
         cin>>arr[i];
-        res[i]=-1;
     }
 
-    for(int i=0;i<n;i++)
+    for(int i=n-1;i>=0;i--)
     {
-        while(!st.empty()&&arr[st.top()]<arr[i])
-        {
-            res[st.top()]=arr[i];
+        while(!st.empty()&&st.top()<=arr[i])
             st.pop();
-        }
-        st.push(i);
+        if(st.empty())
+            res[i]=-1;
+        else
+            res[i]=st.top();
+        st.push(arr[i]);
     }
 
     for(int i=0;i<n;i++)
