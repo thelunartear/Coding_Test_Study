@@ -5,15 +5,15 @@ using namespace std;
 int n,m,x,y;
 int dx[]={1,-1,0,0};
 int dy[]={0,0,1,-1};
-int grid[1001][1001]={0,};
-bool isVisited[1001][1001];
-int ans[1001][1001]={0,};
+int arr[1001][1001];
+bool isVisit[1001][1001];
+int ans[1001][1001];
 
-void bfs(int x, int y)
+void bfs(int x,int y)
 {
-    queue<pair<int, int>> q;
+    queue<pair<int,int>> q;
     q.push({x,y});
-    isVisited[x][y]=true;
+    isVisit[x][y]=true;
     ans[x][y]=0;
 
     while(!q.empty())
@@ -27,11 +27,11 @@ void bfs(int x, int y)
             int nx=cx+dx[i];
             int ny=cy+dy[i];
 
-            if(nx>=0 && nx<n && ny>=0 && ny<m)
+            if(nx>=0&&nx<n&&ny>=0&&ny<m)
             {
-                if(grid[nx][ny]==1 && !isVisited[nx][ny])
+                if(arr[nx][ny]==1 && !isVisit[nx][ny])
                 {
-                    isVisited[nx][ny]=true;
+                    isVisit[nx][ny]=true;
                     ans[nx][ny]=ans[cx][cy]+1;
                     q.push({nx,ny});
                 }
@@ -51,13 +51,13 @@ int main()
     {
         for(int j=0;j<m;j++)
         {
-            cin>>grid[i][j];
-            if(grid[i][j]==2)
+            cin>>arr[i][j];
+            if(arr[i][j]==2)
             {
                 x=i;
                 y=j;
             }
-            if(grid[i][j]==0)
+            if(arr[i][j]==0)
             {
                 ans[i][j]=0;
             }
@@ -70,14 +70,10 @@ int main()
     {
         for(int j=0;j<m;j++)
         {
-            if(ans[i][j]==0 && grid[i][j]==1)
-            {
-                cout<<-1<<" ";
-            }
+            if(ans[i][j]==0 && arr[i][j]==1)
+                cout<<-1<<' ';
             else
-            {
-                cout<<ans[i][j]<<" ";
-            }
+                cout<<ans[i][j]<<' ';
         }
         cout<<"\n";
     }
