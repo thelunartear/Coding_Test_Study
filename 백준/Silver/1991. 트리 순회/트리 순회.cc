@@ -2,34 +2,59 @@
 #include <unordered_map>
 using namespace std;
 
-struct TreeNode
+class Node
 {
+public:
     char data;
-    TreeNode* left;
-    TreeNode* right;
+    Node* left;
+    Node* right;
 
-    TreeNode(char val):data(val), left(nullptr), right(nullptr) {}
+    Node(char val):data(val), left(nullptr), right(nullptr) {}
 };
 
-void preorder(TreeNode* root)
+unordered_map<char,Node*> tree;
+void buildtree(int n)
 {
-    if(root==nullptr)   return;
+    char parent, left, right;
+    for(int i=0;i<n;i++)
+    {
+        cin>>parent>>left>>right;
+
+        if (tree.find(parent) == tree.end()) 
+        {
+            tree[parent] = new Node(parent);
+        }
+        
+        if (left != '.') {
+            tree[left] = new Node(left);
+            tree[parent]->left = tree[left];
+        }
+        
+        if (right != '.') {
+            tree[right] = new Node(right);
+            tree[parent]->right = tree[right];
+        }
+    }
+}
+void preorder(Node* root)
+{
+    if(!root)   return;
     cout<<root->data;
     preorder(root->left);
     preorder(root->right);
 }
 
-void inorder(TreeNode* root)
+void inorder(Node* root)
 {
-    if(root==nullptr)   return;
+    if(!root)   return;
     inorder(root->left);
     cout<<root->data;
     inorder(root->right);
 }
 
-void postorder(TreeNode* root)
+void postorder(Node* root)
 {
-    if(root==nullptr)   return;
+    if(!root)   return;
     postorder(root->left);
     postorder(root->right);
     cout<<root->data;
@@ -43,39 +68,8 @@ int main()
     int n;
     cin>>n;
 
-    unordered_map<char, TreeNode*> nodes;
-    for(int i=0;i<n;i++)
-    {
-        char p,l,r;
-        cin>>p>>l>>r;
-
-        if(nodes.find(p)==nodes.end())
-        {
-            nodes[p]=new TreeNode(p);
-        }
-        TreeNode* parent = nodes[p];
-
-        if(l!='.')
-        {
-            if(nodes.find(l)==nodes.end())
-            {
-                nodes[l]=new TreeNode(l);
-            }
-            parent->left=nodes[l];
-        }
-
-        if(r!='.')
-        {
-            if(nodes.find(r)==nodes.end())
-            {
-                nodes[r]=new TreeNode(r);
-            }
-            parent->right=nodes[r];
-        }
-    }
-
-    TreeNode* root = nodes['A'];
-
+    buildtree(n);
+    Node* root=tree['A'];
     preorder(root);
     cout<<"\n";
     inorder(root);
