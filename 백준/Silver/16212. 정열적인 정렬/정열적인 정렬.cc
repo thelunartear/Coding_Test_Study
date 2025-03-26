@@ -2,7 +2,7 @@
 #include <algorithm>
 using namespace std;
 
-int a[1001];
+int a[500001];
 
 int main()
 {
@@ -12,12 +12,9 @@ int main()
     int n;
     cin>>n;
 
-    if(n<=1000)
-    {
-        for(int i=0;i<n;i++)
-            cin>>a[i];
-        sort(a,a+n);
-        for(int i=0;i<n;i++)
-            cout<<a[i]<<' ';
-    }
+    for(int i=0;i<n;i++)
+        cin>>a[i];
+    sort(a,a+n);
+    for(int i=0;i<n;i++)
+        cout<<a[i]<<' ';
 }
