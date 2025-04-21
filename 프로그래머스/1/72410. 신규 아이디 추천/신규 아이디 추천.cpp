@@ -8,15 +8,21 @@ using namespace std;
 string solution(string new_id) {
     string answer = "";
     // 1단계
-    transform(new_id.begin(), new_id.end(), new_id.begin(), ::tolower);
+    // transform(new_id.begin(), new_id.end(), new_id.begin(), ::tolower);
+    for(char &c:new_id)
+        c=tolower(c);
     // 2단계
-    for(int i=0;i<new_id.length();i++)
-    {
-        if((new_id[i]>='a'&&new_id[i]<='z')||(new_id[i]>='0'&&new_id[i]<='9')||new_id[i]=='-'||new_id[i]=='_'||new_id[i]=='.')
-            answer+=new_id[i];
-        else
-            continue;
-    }
+    //for(int i=0;i<new_id.length();i++)
+    //{
+    //    if((new_id[i]>='a'&&new_id[i]<='z')||(new_id[i]>='0'&&new_id[i]<='9')||new_id[i]=='-'||new_id[i]=='_'||new_id[i]=='.')
+    //        answer+=new_id[i];
+    //    else
+    //        continue;
+    //}
+    copy_if(new_id.begin(), new_id.end(), std::back_inserter(answer),
+    [](char c) {
+        return std::isalnum(c) || c == '-' || c == '_' || c == '.';
+    });
     // 3단계
     regex dot("\\.+");
     answer=regex_replace(answer,dot,".");
