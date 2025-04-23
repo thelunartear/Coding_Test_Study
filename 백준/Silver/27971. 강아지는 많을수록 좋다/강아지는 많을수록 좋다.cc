@@ -1,7 +1,9 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int main() 
+const int INF = 1e9;
+
+int main()
 {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
@@ -10,37 +12,37 @@ int main()
     cin >> N >> M >> A >> B;
 
     vector<bool> forbidden(N + 1, false);
-    for (int i = 0; i < M; ++i) 
+    for (int i = 0; i < M; ++i)
     {
         int l, r;
         cin >> l >> r;
-        for (int j = l; j <= r; ++j) 
+        for (int j = l; j <= r; ++j)
         {
             forbidden[j] = true;
         }
     }
 
-    vector<int> dist(N + 1, -1);
-    queue<int> q;
+    vector<int> dp(N + 1, INF);
+    dp[0] = 0;
 
-    dist[0] = 0;
-    q.push(0);
-
-    while (!q.empty()) 
+    for (int i = 1; i <= N; ++i)
     {
-        int curr = q.front();
-        q.pop();
+        if (forbidden[i]) continue;
 
-        for (int next : {curr + A, curr + B}) 
+        if (i - A >= 0 && dp[i - A] != INF)
         {
-            if (next <= N && dist[next] == -1 && !forbidden[next]) 
-            {
-                dist[next] = dist[curr] + 1;
-                q.push(next);
-            }
+            dp[i] = min(dp[i], dp[i - A] + 1);
+        }
+        if (i - B >= 0 && dp[i - B] != INF)
+        {
+            dp[i] = min(dp[i], dp[i - B] + 1);
         }
     }
 
-    cout << dist[N];
+    if (dp[N] == INF)
+        cout << -1 << '\n';
+    else
+        cout << dp[N] << '\n';
+
     return 0;
 }
