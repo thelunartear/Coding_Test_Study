@@ -5,7 +5,6 @@
 using namespace std;
 
 string solution(string s) {
-    string answer = "";
     int len=s.length();
     int idx=0;
     for(int i=0;i<len;i++)
@@ -27,6 +26,5 @@ string solution(string s) {
             idx++;
         }
     }
-    answer=s;
-    return answer;
+    return s;
 }
